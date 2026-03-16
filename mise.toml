@@ -1,0 +1,22 @@
+[tools]
+dotnet = "latest"
+
+[tasks.install]
+description = "Install tools listed in the manifest."
+run = """
+dotnet tool restore
+"""
+
+[tasks.validate]
+description = "Validate all OrcAI job manifests"
+depends = ["install"]
+run = """
+dotnet orcai validate "jobs/**/*.yml" --continue-on-error
+"""
+
+[tasks.run-jobs]
+description = "Run OrcAI jobs after validation"
+depends = ["install"]
+run = """
+dotnet orcai run "jobs/**/*.yml" --continue-on-error
+"""

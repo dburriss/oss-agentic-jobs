@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "orcai.tool": {
+      "version": "0.4.2",
+      "commands": [
+        "orcai"
+      ],
+      "rollForward": false
+    }
+  }
+}

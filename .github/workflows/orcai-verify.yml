@@ -1,0 +1,35 @@
+name: OrcAI Verify
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "jobs/**"
+
+jobs:
+  validate:
+    name: Validate job configs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.x"
+
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+
+      - name: Restore tools
+        run: mise run install
+
+      - name: Validate OrcAI job configs
+        env:
+          ORCAI_APP_ID: ${{ secrets.ORCAI_APP_ID }}
+          ORCAI_APP_INSTALLATION_ID: ${{ secrets.ORCAI_APP_INSTALLATION_ID }}
+          ORCAI_APP_PRIVATE_KEY: ${{ secrets.ORCAI_APP_PRIVATE_KEY }}
+        run: mise run validate

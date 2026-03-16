@@ -1,0 +1,72 @@
+name: OrcAI Run
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "jobs/**"
+
+permissions:
+  contents: write
+
+jobs:
+  run-jobs:
+    name: Run OrcAI jobs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check for [skip ci]
+        if: contains(github.event.head_commit.message, '[skip ci]')
+        run: |
+          echo "::notice::Commit message contains [skip ci] — skipping workflow."
+          exit 0
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.x"
+
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+
+      - name: Restore tools
+        run: mise install && mise run install
+
+      - name: Validate OrcAI job configs
+        env:
+          ORCAI_APP_ID: ${{ secrets.ORCAI_APP_ID }}
+          ORCAI_APP_INSTALLATION_ID: ${{ secrets.ORCAI_APP_INSTALLATION_ID }}
+          ORCAI_APP_PRIVATE_KEY: ${{ secrets.ORCAI_APP_PRIVATE_KEY }}
+        run: mise run validate
+
+      - name: Run OrcAI jobs
+        env:
+          ORCAI_APP_ID: ${{ secrets.ORCAI_APP_ID }}
+          ORCAI_APP_INSTALLATION_ID: ${{ secrets.ORCAI_APP_INSTALLATION_ID }}
+          ORCAI_APP_PRIVATE_KEY: ${{ secrets.ORCAI_APP_PRIVATE_KEY }}
+        run: mise run run-jobs
+
+      - name: Detect changed lock files
+        id: lock-diff
+        run: |
+          changed=$(git diff --name-only -- 'jobs/**/*.lock.json')
+          if [ -n "$changed" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push lock files
+        if: steps.lock-diff.outputs.changed == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add jobs/**/*.lock.json
+          git commit -m "[skip ci] chore: update orcai lock files"
+          git push

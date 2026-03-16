@@ -66,9 +66,9 @@ Configure these in **Settings → Secrets and variables → Actions → Reposito
 
 | Secret name              | Description                                          |
 |--------------------------|------------------------------------------------------|
-| `ORCA_APP_ID`            | GitHub App numeric ID                                |
-| `ORCA_APP_INSTALLATION_ID` | Installation ID for the target organisation        |
-| `ORCA_APP_PRIVATE_KEY`   | Full PEM content of the App private key (multiline) |
+| `ORCAI_APP_ID`            | GitHub App numeric ID                                |
+| `ORCAI_APP_INSTALLATION_ID` | Installation ID for the target organisation        |
+| `ORCAI_APP_PRIVATE_KEY`   | Full PEM content of the App private key (multiline) |
 
 OrcAI reads these env vars directly — no `orcai auth` command is needed in CI.
 
@@ -92,7 +92,7 @@ Set to **"Read and write permissions"** so that `GITHUB_TOKEN` can push the auto
 1. `actions/checkout@v4`
 2. `actions/setup-dotnet@v4` — .NET 10
 3. `mise run install` (runs `dotnet tool restore` against `dotnet-tools.json` so `OrcAI.Tool` is available locally)
-4. Inject `ORCA_APP_ID`, `ORCA_APP_INSTALLATION_ID`, `ORCA_APP_PRIVATE_KEY` from secrets as env vars
+4. Inject `ORCAI_APP_ID`, `ORCAI_APP_INSTALLATION_ID`, `ORCAI_APP_PRIVATE_KEY` from secrets as env vars
 5. `mise run validate` (runs `orcai validate "jobs/**/*.yml" --continue-on-error` only)
 
 **Notes:**
@@ -118,7 +118,7 @@ Required for `GITHUB_TOKEN` to push the lock-file commit.
    - Full history needed for a clean push after committing lock files.
 3. `actions/setup-dotnet@v4` — .NET 10
 4. `mise install`
-5. Inject `ORCA_APP_ID`, `ORCA_APP_INSTALLATION_ID`, `ORCA_APP_PRIVATE_KEY` from secrets as env vars
+5. Inject `ORCAI_APP_ID`, `ORCAI_APP_INSTALLATION_ID`, `ORCAI_APP_PRIVATE_KEY` from secrets as env vars
 6. `mise run validate`
    - Pre-flight check before executing anything. Fails fast if configs are broken.
 7. `mise run run-jobs`

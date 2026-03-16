@@ -29,14 +29,14 @@ dotnet tool restore
 description = "Validate all OrcAI job manifests"
 depends = ["install"]
 run = """
-orcai validate "jobs/**/*.yml" --continue-on-error
+dotnet orcai validate "jobs/**/*.yml" --continue-on-error
 """
 
 [tasks.run-jobs]
 description = "Run OrcAI jobs after validation"
 depends = ["install"]
 run = """
-orcai run "jobs/**/*.yml" --continue-on-error
+dotnet orcai run "jobs/**/*.yml" --continue-on-error
 """
 ```
 

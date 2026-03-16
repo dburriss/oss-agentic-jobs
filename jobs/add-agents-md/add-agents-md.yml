@@ -1,0 +1,14 @@
+job:
+  title: "Add AGENTS.md"
+  org: "dburriss"
+
+repos:
+  - "wye"
+  - "fennel"
+  - "unique"
+  - "overboard"
+  - "event-feed"
+
+issue:
+  template: "./add-agents-md.md"
+  # labels: ["documentation", "automated"]

@@ -150,6 +150,8 @@ Required for `GITHUB_TOKEN` to push the lock-file commit.
 
 ## OrcAI agent skill
 
+Skills are markdown files that teach a companion agent how to perform tasks related to the repository. This SKILL.md file MUST contain frontmatter with a `name` and `description` field. `name` should be `orcai` and the desciption should summarize the what it does and when to use it.
+
 The `.agent/orcai/` skill should teach a companion agent how to:
 
 1. Use the `mise` tasks (`mise install`, `mise run validate`, `mise run run-jobs`) to run command tasks.

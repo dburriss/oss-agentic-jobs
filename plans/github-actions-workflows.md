@@ -1,11 +1,6 @@
 # Plan: GitHub Actions Workflows for OrcAI
 
-## Overview
-
-Two workflows that automate running OrcAI jobs against the `jobs/` directory.
-
-- **PR:** validate job configs on every pull request that touches `jobs/`
-- **Main:** validate then run jobs on every push to `main` that touches `jobs/`, commit generated lock files back
+<context>
 
 ## Agent Environment
 
@@ -169,9 +164,25 @@ Skill documentation can be found:
 1. https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
 2. https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
 
----
+</context>
 
-## Implementation checklist
+<objective>
+
+Your task is to set up two workflows that automate the validation and execution of OrcAI jobs defined in YAML files under the `jobs/` directory of the repository.
+
+Two workflows that automate running OrcAI jobs against the `jobs/` directory.
+
+- **PR:** validate job configs on every pull request that touches `jobs/`
+- **Main:** validate then run jobs on every push to `main` that touches `jobs/`, commit generated lock files back
+
+You will also create a skill for a companion agent to understand how to use the `mise` tasks and `orcai` CLI for local development and troubleshooting. Lastly, you will update the README with an overview of the repository, instructions for setting up GitHub App authentication, and usage instructions for creating and running jobs.
+</objective>
+
+<role>
+You are a DevOps engineer with expertise in GitHub Actions and CI/CD pipelines. 
+</role>
+
+<instrucctions>
 
 - [ ] Create `AGENT.md` with an overview of the agent's purpose and tools.
 - [ ] Create `mise.toml` by running `mise use dotnet`.
@@ -182,6 +193,35 @@ Skill documentation can be found:
 - [ ] Create `.github/workflows/orcai-verify.yml`
 - [ ] Create `.github/workflows/orcai-run.yml`
 - [ ] Create the orcai SKILL.md file with instructions for using the `mise` tasks and `orcai` CLI to create and run jobs.
-- [ ] Create a README.md with an overview of the repository and instructions for setting up the GitHub App authentication (linking to the step-by-step guide below) as well as usage instructions for creating and running jobs. Add a section explaining the GitHub Actions workflows and how they automate validation and execution of jobs on PRs and merges to main. Be sure to add a link to the orcai repository and documentation for reference.
+- [ ] Create/update the README.md with an overview of the repository and instructions for setting up the GitHub App authentication (linking to the step-by-step guide below) as well as usage instructions for creating and running jobs. Add a section explaining the GitHub Actions workflows and how they automate validation and execution of jobs on PRs and merges to main. Be sure to add a link to the orcai repository and documentation for reference.
 
 End with a printout of a step-by-step guide for the authentication setup, as this is the most manual part of the process and requires creating a GitHub App with the correct permissions.
+</instrucctions>
+
+<output>
+
+The following files are expected:
+
+- `AGENT.md`
+- `mise.toml`
+- `dotnet-tools.json`
+- `jobs/` (folder for job YAMLs and issue templates)
+- `.github/workflows/orcai-verify.yml`
+- `.github/workflows/orcai-run.yml`
+- `.agent/orcai/SKILL.md`
+- `README.md`
+
+</output>
+
+<acceptance-criteria>
+
+- The `AGENT.md` file provides a clear overview of the agent's purpose and the tools it uses.
+- The `mise.toml` file is correctly set up with the specified tasks and dependencies.
+- The `dotnet-tools.json` file includes `OrcAI.Tool` as a local tool.
+- The `jobs/` directory is created and ready to hold job YAML files and issue templates.
+- The `orcai-verify.yml` workflow correctly validates job configs on pull requests targeting the `jobs/` directory.
+- The `orcai-run.yml` workflow correctly validates and runs jobs on pushes to `main` that affect the `jobs/` directory, and commits generated lock files back to the repository without causing infinite loops.
+- The `SKILL.md` file provides clear instructions for using the `mise` tasks and `orcai` CLI for local development and troubleshooting.
+- The `README.md` file includes an overview of the repository, instructions for setting up GitHub App authentication, usage instructions for creating and running jobs, and an explanation of the GitHub Actions workflows.
+
+</acceptance-criteria>

@@ -35,7 +35,7 @@ jobs:
       # so Copilot can restore packages without ever seeing credentials.
       - name: Start mock server
         run: |
-          python3 -m http.server 8080 --directory mock-server &
+          nohup python3 -m http.server 8080 --directory mock-server > /tmp/mock-server.log 2>&1 &
           echo $! > /tmp/mock-server.pid
           echo "Mock server PID: $(cat /tmp/mock-server.pid)"
 

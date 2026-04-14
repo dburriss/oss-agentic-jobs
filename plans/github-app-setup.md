@@ -63,7 +63,7 @@ After installing, the URL will be:
 https://github.com/organizations/<org>/settings/installations/<INSTALLATION_ID>
 ```
 
-Note down the numeric ID at the end of the URL — that is your `ORCA_APP_INSTALLATION_ID`.
+Note down the numeric ID at the end of the URL — that is your `ORCAI_APP_INSTALLATION_ID`.
 
 Alternatively, retrieve it via the CLI (requires a JWT, so easier to just read it from the URL).
 
@@ -103,15 +103,15 @@ Go to: `https://github.com/dburriss/oss-agentic-jobs/settings/secrets/actions`
 
 Add the following three repository secrets:
 
-### `ORCA_APP_ID`
+### `ORCAI_APP_ID`
 
 Value: the integer App ID from Step 4
 
-### `ORCA_APP_INSTALLATION_ID`
+### `ORCAI_APP_INSTALLATION_ID`
 
 Value: the integer installation ID from Step 3
 
-### `ORCA_APP_PRIVATE_KEY`
+### `ORCAI_APP_PRIVATE_KEY`
 
 Value: the full PEM content from `~/.config/orca/app.pem`
 
@@ -152,6 +152,6 @@ If the validate step fails with a 401 or 403, check:
 
 | Item                       | Where to find it                                                      |
 |----------------------------|-----------------------------------------------------------------------|
-| `ORCA_APP_ID`              | App settings page → General tab (integer near the top)               |
-| `ORCA_APP_INSTALLATION_ID` | URL after installing: `.../installations/<ID>`                        |
-| `ORCA_APP_PRIVATE_KEY`     | `cat ~/.config/orca/app.pem` (created by `orcai auth create-app`)    |
+| `ORCAI_APP_ID`              | App settings page → General tab (integer near the top)               |
+| `ORCAI_APP_INSTALLATION_ID` | URL after installing: `.../installations/<ID>`                        |
+| `ORCAI_APP_PRIVATE_KEY`     | `cat ~/.config/orca/app.pem` (created by `orcai auth create-app`)    |

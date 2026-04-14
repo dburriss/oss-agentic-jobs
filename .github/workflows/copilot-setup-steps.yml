@@ -28,3 +28,26 @@ jobs:
 
       - name: Restore tools
         run: mise install && mise run install
+
+      # Start a mock HTTP server to verify that background services started here
+      # are reachable at localhost within the Copilot agent session.
+      # Long-term pattern: replace this with a NuGet proxy that holds secrets,
+      # so Copilot can restore packages without ever seeing credentials.
+      - name: Start mock server
+        run: |
+          python3 -m http.server 8080 --directory mock-server &
+          echo $! > /tmp/mock-server.pid
+          echo "Mock server PID: $(cat /tmp/mock-server.pid)"
+
+      - name: Wait for mock server to be ready
+        run: |
+          for i in {1..10}; do
+            if curl -sf http://localhost:8080/ping.json > /dev/null; then
+              echo "Mock server is up."
+              exit 0
+            fi
+            echo "Waiting... ($i)"
+            sleep 1
+          done
+          echo "Mock server did not start in time." >&2
+          exit 1

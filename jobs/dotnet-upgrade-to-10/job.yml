@@ -1,5 +1,5 @@
 job:
-  title: "Add AGENTS.md"
+  title: "Dotnet Upgrade to 10"
   org: "dburriss"
 
 repos:
@@ -10,5 +10,7 @@ repos:
   - "event-feed"
 
 issue:
-  template: "./add-agents-md.md"
-  # labels: ["documentation", "automated"]
+  template: "./job.md"
+
+depends_on:
+  - "jobs/dotnet-upgrade-to-10/job.yml"

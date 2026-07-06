@@ -1,23 +1,28 @@
 # Add AGENTS.md to Repository
 
 ## Objective
+
 Add an AGENTS.md file to a repository that provides AI assistants with essential information about the project structure, tech stack, and build/test instructions.
 
 ## Role
+
 You are a developer creating documentation for AI assistants. Your task is to analyze the repository and create a concise AGENTS.md file that helps AI assistants work effectively with the codebase.
 
 ## Context
+
 The repository may or may not already have an AGENTS.md file. If it exists, this migration should not be applied. The file should provide essential information without creating a high maintenance burden.
 
 ## Requirements
+
 - Check if AGENTS.md already exists - if so, skip this migration
 - Analyze the repository structure and tech stack
 - Create AGENTS.md with General instructions, tech stack, and build/test instructions
 - Include brief repository overview and structure
 - Keep information concise and minimize maintenance burden
-- Adapt instructions based on the actual project 
+- Adapt instructions based on the actual project
 
 ## Instructions
+
 - First check if AGENTS.md already exists in the repository root
 - If it exists, exit with a message that the file already exists
 - Analyze the repository to understand:
@@ -65,8 +70,8 @@ This is a .NET web application with the following structure:
 - `docs/` - Documentation
 ```
 
-
 ## Acceptance Criteria
+
 - AGENTS.md file created in repository root
 - File contains all required sections
 - Information is accurate based on repository analysis

@@ -13,4 +13,4 @@ issue:
   template: "./job.md"
 
 depends_on:
-  - "jobs/dotnet-multi-version-setup/job.yml"
+  - "jobs/add-agents-md/job.yml"

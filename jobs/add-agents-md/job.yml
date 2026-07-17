@@ -1,6 +1,17 @@
+# This job will create an issue in each of the listed repositories to add an AGENTS.md file. 
+# Action: Create AGENTS.md file in each repository using OpenCode
 job:
   title: "Add AGENTS.md"
   org: "dburriss"
+
+# Post a comment to trigger an agent via slash command
+action:
+  type: cmd
+  execute: "echo 'job done'"
+
+# action:
+#   type: comment
+#   comment: "/opencode Open a Pull Request to address this issue"
 
 repos:
   - "wye"

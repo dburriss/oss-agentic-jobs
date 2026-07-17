@@ -13,4 +13,4 @@ issue:
   template: "./job.md"
 
 depends_on:
-  - "jobs/dotnet-upgrade-to-10/job.yml"
+  - "jobs/dotnet-multi-version-setup/job.yml"
